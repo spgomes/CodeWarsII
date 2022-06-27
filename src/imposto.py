@@ -3,37 +3,61 @@ from abc import abstractmethod, ABC
 class Imposto(ABC):
     def __init__(self, tipo) -> None:
         self.tipo = tipo
-        self.tirando_float = 1000
     
     @abstractmethod
-    def calculo(self):
+    def calculo_contribuicao(self):
         pass
 
 class INSS(Imposto):
     def __init__(self, tipo) -> None:
         super().__init__(tipo)
 
-    def calculo(self, salario, valores_faixa, aliquotas, faixa):
-        salario *= self.tirando_float 
-        valores_faixa = [x*self.tirando_float for x in valores_faixa]
-        aliquotas = [x*self.tirando_float for x in aliquotas]
-        recolher = 0
-        if faixa != 1:
-            for f in range(faixa):
-                if f == faixa:
-                    recolher += (salario - valores_faixa[f][0])*aliquotas[f]
-                elif f != 0:
-                    recolher += (valores_faixa[f][1] - valores_faixa[f][0])*aliquotas[f]
-                elif f == 0:
-                    recolher += valores_faixa[f][1]*aliquotas[f]
-            return recolher
-        else:
-            recolher += (valores_faixa[0][1] - salario)*aliquotas[0]
-        return recolher
+    def calculo_contribuicao(self, salario)-> int:
+        salario_inteiro = salario * 100
+        
+        aliquotas = [{
+        'inicio': 0,
+        'fim': 190398,
+        'aliquota': 0,
+        'deducao': 0,
+    },
+    {
+        'inicio': 190398,
+        'fim': 282665,
+        'aliquota': 7.5,
+        'deducao': 14280,
+    },
+    {
+        'inicio': 282666,
+        'fim': 375105,
+        'aliquota': 15,
+        'deducao': 35480,
+    },
+    {
+        'inicio': 375106,
+        'fim': 466468,
+        'aliquota': 22.5,
+        'deducao': 63613,
+    },
+    {
+        'inicio': 466469,
+        'fim': None,
+        'aliquota': 27.5,
+        'deducao': 86936,
+    }
+    ]
+        for faixa in aliquotas:
+            if salario_inteiro < faixa['inicio']:
+                continue
+            if faixa['fim'] is not None and salario_inteiro > faixa['fim']:
+                continue
+            return int((salario_inteiro) * (faixa['aliquota'] / 100) - faixa['deducao'])
+        return 0
+
 
 class IRRF(Imposto):
     def __init__(self, tipo) -> None:
         super().__init__(tipo)
 
-    def calculo(self):
+    def calculo_contribuicao(self):
         pass
