@@ -1,7 +1,7 @@
 from unittest import TestCase
 from datetime import datetime
 
-from src.funcionario import Funcionario
+from src.entidades.funcionario import Funcionario
 
 class TestFuncionario(TestCase):
     def __init__(self, methodName: str = ...) -> None:

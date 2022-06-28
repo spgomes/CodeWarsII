@@ -1,8 +1,8 @@
 from unittest import TestCase
 from datetime import datetime
 
-from src.funcionarioServices import AcoesFuncionario
-from src.funcionario import Funcionario
+from src.services.funcionarioServices import AcoesFuncionario
+from src.entidades.funcionario import Funcionario
 
 class TestAlterarFuncionario(TestCase):
 

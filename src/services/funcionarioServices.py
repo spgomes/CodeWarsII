@@ -1,4 +1,4 @@
-from src.funcionario import Funcionario
+from src.entidades.funcionario import Funcionario
 from src.exceptions.funcionario_not_found_error import FuncionarioNotFoundError
 from typing import List
 from datetime import datetime
