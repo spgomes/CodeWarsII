@@ -26,3 +26,20 @@ class TestImposto(TestCase):
     
     def test_contribuicao_inss_acima_quarta_faixa(self):
         self.assertEqual(self.inss.calculo_contribuicao(1000000),82839)
+
+    def test_contribuicao_irrf_primeira_faixa(self):
+        self.assertEqual(self.irrf.calculo_contribuicao(100000),0)
+
+    def test_contribuicao_irrf_segunda_faixa(self):
+        self.assertEqual(self.irrf.calculo_contribuicao(309000),6796)
+    
+    def test_contribuicao_irrf_terceira_faixa(self):
+        self.assertEqual(self.irrf.calculo_contribuicao(400000),18577)
+    
+    def test_contribuicao_irrf_quarta_faixa(self):
+        self.assertEqual(self.irrf.calculo_contribuicao(500000),36822)
+
+    def test_contribuicao_irrf_quinta_faixa(self):
+        self.assertEqual(self.irrf.calculo_contribuicao(1000000),165283)
+    
+    

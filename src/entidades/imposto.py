@@ -56,6 +56,9 @@ class IRRF(Imposto):
         super().__init__(salario_base)
 
     def calculo_contribuicao(self, salario_base):
+            
+        salario_deduzido_inss = salario_base - INSS.calculo_contribuicao(self, salario_base)
+        
         aliquotas = [{
         'inicio': 0,
         'fim': 190398,
@@ -88,9 +91,10 @@ class IRRF(Imposto):
     }
     ]
         for faixa in aliquotas:
-            if salario_base < faixa['inicio']:
+            if salario_deduzido_inss < faixa['inicio']:
                 continue
-            if faixa['fim'] is not None and salario_base > faixa['fim']:
+            if faixa['fim'] is not None and salario_deduzido_inss > faixa['fim']:
                 continue
-            return int((salario_base) * (faixa['aliquota'] / 100) - faixa['deducao'])
+            return int(salario_deduzido_inss * (faixa['aliquota'] / 100) - faixa['deducao'])
         return 0
+
