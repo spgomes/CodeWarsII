@@ -1,14 +1,15 @@
 from datetime import datetime
+import random
+
 
 class Funcionario():
-    def __init__(self, matricula: str, nome: str, cpf: str, dta_admissao: datetime, cod_cargo: str, comissao: bool) -> None:
-        self.__matricula = matricula
+    def __init__(self, nome: str, cpf: str, data_admissao: datetime, cod_cargo: str, comissao: bool) -> None:
+        self.__matricula = self.gerador_matricula()
         self.__nome = nome
         self.__cpf = cpf
-        self.__dta_admissao = dta_admissao
+        self.__data_admissao = data_admissao
         self.__cod_cargo = cod_cargo
         self.__comissao = comissao
-
 
     @property
     def matricula(self):
@@ -23,8 +24,8 @@ class Funcionario():
         return self.__cpf
 
     @property
-    def dta_admissao(self):
-        return self.__dta_admissao
+    def data_admissao(self):
+        return self.__data_admissao
 
     @property
     def cod_cargo(self):
@@ -36,3 +37,6 @@ class Funcionario():
     
     def comissaoSet(self, valor):
         self.__comissao = valor
+    
+    def gerador_matricula():
+        return random.randint(100000,999999)

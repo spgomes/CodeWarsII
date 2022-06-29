@@ -2,7 +2,7 @@ from src.entidades.funcionario import Funcionario
 from src.exceptions.funcionario_not_found_error import FuncionarioNotFoundError
 from typing import List
 from datetime import datetime
-class AcoesFuncionario():
+class FuncionarioServices():
     def __init__(self) -> None:
         self.lista_funcionario = []
 

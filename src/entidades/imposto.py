@@ -13,7 +13,7 @@ class INSS(Imposto):
         super().__init__(salario_base)
 
     def calculo_contribuicao(self, salario_base)-> int:
-        
+        salario_base = self.salario_base
         aliquotas = [{
         'inicio': 0,
         'fim': 121200,
@@ -39,8 +39,8 @@ class INSS(Imposto):
         'deducao': 16382,
     }
     ]
-        if salario_base >= 708722:
-            salario_base = 708722
+        if salario_base >= aliquotas[aliquotas.count(1) - 1]['fim']:
+            salario_base = aliquotas[aliquotas.count(1) - 1]['fim']
 
         for faixa in aliquotas:
             if salario_base < faixa['inicio']:
