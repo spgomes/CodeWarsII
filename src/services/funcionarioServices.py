@@ -1,20 +1,23 @@
 from src.entidades.funcionario import Funcionario
 from src.exceptions.funcionario_not_found_error import FuncionarioNotFoundError
-from typing import List
 from datetime import datetime
+
+from src.percistence.funcionarioPercistence import FuncionarioPersistence
+
+
 class FuncionarioServices():
-    def __init__(self) -> None:
+    def __init__(self, persistencia: FuncionarioPersistence) -> None:
         self.lista_funcionario = []
+        self.persistencia = persistencia
 
-    def inserir(self, funcionario: Funcionario) -> None:
-        self.lista_funcionario.append(funcionario)
+    def save(self) -> None:
+        return self.persistencia.save()
 
-    def listar_todos(self) -> List[Funcionario]:
-        return self.lista_funcionario
+    def get_all(self) -> list:
+        return self.persistencia.get_all()
 
-    def consulta(self, matricula: str) -> Funcionario:
-        funcionarios = list(filter(lambda x: x.matricula == matricula, self.lista_funcionario))
-        return funcionarios[0]
+    def get_one(self, matricula: str) -> dict:
+        return self.persistencia.get_one()
 
     def excluir_por_matricula(self, matricula: str) -> None:
         self.lista_funcionario.remove(self.consulta(matricula))
