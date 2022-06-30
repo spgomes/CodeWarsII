@@ -8,12 +8,11 @@ from src.services.holeriteServices import HoleriteServices
 class Holerite():
     def __init__(self, faltas, matricula:int, funcionarioServices: FuncionarioServices, 
                 impostoServices: ImpostoService, holeriteServices: HoleriteServices) -> None:
-        
-        query = Adapter().insert(matricula)
+
         dados_funcionario = funcionarioServices.get_one(matricula)
 
         self.__faltas = faltas
-        self.__matricula = matricula
+        self.__matricula = funcionarioServices.matricula
         self.__cargo = dados_funcionario['Descricao']
         self.__comissao = dados_funcionario['Comissao']
         self.__data_admissao = dados_funcionario['Nome']
@@ -22,7 +21,7 @@ class Holerite():
         self.__desconto_faltas = holeriteServices.calculo_desconto_faltas()
         self.__inss = impostoServices.calculo_contribuicao_inss()
         self.__irrf = impostoServices.calculo_contribuicao_irrf()
-        self.__salario_liquido = holeriteServices.calculo_salario_liquido
+        self.__salario_liquido = holeriteServices.calculo_salario_liquido()
         self.__salario_base_de_calculo = holeriteServices.calculo_salario_base_de_calculo()
         self.__fgts = holeriteServices.calculo_fgts()
 

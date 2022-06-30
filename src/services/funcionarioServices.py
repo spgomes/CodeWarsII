@@ -9,7 +9,12 @@ class FuncionarioServices():
     def __init__(self, persistencia: FuncionarioPersistence, funcionario: Funcionario) -> None:
         self.persistencia = persistencia
         self.funcionario = funcionario
+        self.matricula = self.get_matricula()
 
+    def get_matricula(self):
+        matricula = Adapter().insert_matricula()
+        return matricula
+    
     def save(self) -> None:
         return self.persistencia.save()
 
@@ -17,7 +22,7 @@ class FuncionarioServices():
         return self.persistencia.get_all()
 
     def get_one(self, matricula: str) -> dict:
-        return self.persistencia.get_one()
+        return self.persistencia.get_one(self, matricula)
 
     def excluir_por_matricula(self, matricula: str) -> None:
         return self.persistencia.remove()

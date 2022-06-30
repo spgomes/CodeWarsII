@@ -1,10 +1,8 @@
 
-import random
-
 
 class Funcionario():
-    def __init__(self, nome: str, cpf: str, data_admissao: str, cod_cargo: str, comissao: bool) -> None:
-        self.__matricula = self.gerador_matricula()
+    def __init__(self, matricula: int, nome: str, cpf: str, data_admissao: str, cod_cargo: str, comissao: bool) -> None:
+        self.__matricula = matricula
         self.__nome = nome
         self.__cpf = cpf
         self.__data_admissao = data_admissao
@@ -38,5 +36,3 @@ class Funcionario():
     def comissaoSet(self, valor):
         self.__comissao = valor
     
-    def gerador_matricula():
-        return random.randint(100000,999999)

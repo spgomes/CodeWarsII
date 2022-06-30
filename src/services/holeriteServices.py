@@ -1,15 +1,15 @@
 
 
 
-from src.entidades.funcionario import Funcionario
+from src.entidades.holerite import Holerite
+from src.services.funcionarioServices import FuncionarioServices
 
 
-class HoleriteServices():
-    def __init__(self, faltas: int, funcionario: Funcionario) -> None:
+class HoleriteServices(Holerite):
+    def __init__(self, faltas: int, funcionarioServices: FuncionarioServices) -> None:
         super().__init__(faltas)
-        self.matricula = funcionario.matricula
+        self.matricula = funcionarioServices.get_matricula()
 
-    
     def save_holerite():
         pass
 

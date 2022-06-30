@@ -1,15 +1,22 @@
 
 
 
+import random
 from src.entidades.funcionario import Funcionario
 from src.persistence.bdiServices import BDIAbstract
+from src.services.funcionarioServices import FuncionarioServices
 
 
 class FuncionarioPersistence():
-    def _init_(self, conexao: BDIAbstract, funcionario: Funcionario) -> None:
+    def _init_(self, conexao: BDIAbstract, funcionario: Funcionario, funcionarioServices: FuncionarioServices) -> None:
         self.db = conexao
         self.funcionario = funcionario
-        self.matricula = funcionario.matricula
+        self.funcionarioServices = funcionarioServices
+        self.matricula = funcionarioServices.matricula
+
+        
+    def gerador_matricula():
+        return random.randint(100000,999999)
 
     def save(self, funcionario) -> None:
         pass
