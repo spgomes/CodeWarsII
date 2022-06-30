@@ -6,23 +6,19 @@ from src.persistence.funcionarioPersistence import FuncionarioPersistence
 
 
 class FuncionarioServices():
-    def __init__(self, persistencia: FuncionarioPersistence, funcionario: Funcionario) -> None:
+    def __init__(self, persistencia: FuncionarioPersistence) -> None:
         self.persistencia = persistencia
-        self.funcionario = funcionario
-        self.matricula = self.get_matricula()
 
-    def get_matricula(self):
-        matricula = Adapter().insert_matricula()
-        return matricula
     
     def save(self) -> None:
         return self.persistencia.save()
 
     def get_all(self) -> list:
         return self.persistencia.get_all()
-
-    def get_one(self, matricula: str) -> dict:
-        return self.persistencia.get_one(self, matricula)
+    
+    def get_funcionario(self, matricula: str) -> Funcionario:
+        dados_funcionario = self.persistencia.get_one(self, matricula)
+        return dados_funcionario
 
     def excluir_por_matricula(self, matricula: str) -> None:
         return self.persistencia.remove()

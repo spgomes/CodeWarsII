@@ -1,38 +1,37 @@
 
 
 class Funcionario():
-    def __init__(self, matricula: int, nome: str, cpf: str, data_admissao: str, cod_cargo: str, comissao: bool) -> None:
-        self.__matricula = matricula
-        self.__nome = nome
-        self.__cpf = cpf
-        self.__data_admissao = data_admissao
-        self.__cod_cargo = cod_cargo
-        self.__comissao = comissao
+    def __init__(self, dados_funcionario: dict) -> None:
+        self.__dados_funcionario = dados_funcionario
 
+    
     @property
     def matricula(self):
-        return self.__matricula
+        return self.__dados_funcionario['Matricula']
 
     @property
     def nome(self):
-        return self.__nome
+        return self.__dados_funcionario['Nome']
 
     @property
     def cpf(self):
-        return self.__cpf
+        return self.__dados_funcionario['CPF']
 
     @property
     def data_admissao(self):
-        return self.__data_admissao
+        return self.__dados_funcionario['DataAdmissao']
 
     @property
     def cod_cargo(self):
-        return self.__cod_cargo
+        return self.__dados_funcionario['Cargo']
 
     @property
     def comissao(self):
-        return self.__comissao
+        return self.__dados_funcionario['Comissao']
     
     def comissaoSet(self, valor):
-        self.__comissao = valor
+        self.__dados_funcionario['Comissao'] = valor
+    
+    def to_bd(self, dados_funcionario):
+        return dados_funcionario
     

@@ -8,17 +8,17 @@ from src.services.funcionarioServices import FuncionarioServices
 
 
 class FuncionarioPersistence():
-    def _init_(self, conexao: BDIAbstract, funcionario: Funcionario, funcionarioServices: FuncionarioServices) -> None:
+    def _init_(self, conexao: BDIAbstract, funcionarioServices: FuncionarioServices) -> None:
         self.db = conexao
-        self.funcionario = funcionario
         self.funcionarioServices = funcionarioServices
-        self.matricula = funcionarioServices.matricula
+        
+        
 
         
     def gerador_matricula():
         return random.randint(100000,999999)
 
-    def save(self, funcionario) -> None:
+    def save(self) -> None:
         pass
     
     def get_one(self, matricula: int, ) -> dict:

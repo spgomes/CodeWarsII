@@ -1,22 +1,13 @@
 
 from src.services.ImpostoServices import ImpostoService
-from src.services.funcionarioServices import FuncionarioServices
 from src.services.holeriteServices import HoleriteServices
 
 
 
 class Holerite():
-    def __init__(self, faltas, matricula:int, funcionarioServices: FuncionarioServices, 
-                impostoServices: ImpostoService, holeriteServices: HoleriteServices) -> None:
-
-        dados_funcionario = funcionarioServices.get_one(matricula)
+    def __init__(self, faltas, impostoServices: ImpostoService, holeriteServices: HoleriteServices) -> None:
 
         self.__faltas = faltas
-        self.__matricula = funcionarioServices.matricula
-        self.__cargo = dados_funcionario['Descricao']
-        self.__comissao = dados_funcionario['Comissao']
-        self.__data_admissao = dados_funcionario['Nome']
-        self.__salario_base = dados_funcionario['SalarioBase']
         self.__valor_comissao = holeriteServices.calculo_comissao()
         self.__desconto_faltas = holeriteServices.calculo_desconto_faltas()
         self.__inss = impostoServices.calculo_contribuicao_inss()
@@ -25,21 +16,6 @@ class Holerite():
         self.__salario_base_de_calculo = holeriteServices.calculo_salario_base_de_calculo()
         self.__fgts = holeriteServices.calculo_fgts()
 
-    @property
-    def __matricula(self) -> int:
-        return self.__matricula
-    
-    @property
-    def __data_admissao(self) -> str:
-        return self.__data_admissao
-    
-    @property
-    def __cargo(self) -> str:
-        return self.__cargo
-    
-    @property
-    def __comissao(self) -> int:
-        return self.__comissao
     
     @property
     def __faltas(self) -> int:
@@ -73,6 +49,9 @@ class Holerite():
     def __salario_base(self) -> int:
         return self.__salario_base
     
+    @property
+    def __valor_comissao(self) -> int:
+        return self.__valor_comissao
     
 
 
