@@ -12,7 +12,7 @@ class INSS(Imposto):
     def __init__(self, salario_base) -> None:
         super().__init__(salario_base)
 
-    def calculo_contribuicao(self, salario_base)-> int:
+    def calculo_contribuicao_inss(self, salario_base)-> int:
         salario_base = self.salario_base
         aliquotas = [{
         'inicio': 0,

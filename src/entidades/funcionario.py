@@ -1,9 +1,9 @@
-from datetime import datetime
+
 import random
 
 
 class Funcionario():
-    def __init__(self, nome: str, cpf: str, data_admissao: datetime, cod_cargo: str, comissao: bool) -> None:
+    def __init__(self, nome: str, cpf: str, data_admissao: str, cod_cargo: str, comissao: bool) -> None:
         self.__matricula = self.gerador_matricula()
         self.__nome = nome
         self.__cpf = cpf

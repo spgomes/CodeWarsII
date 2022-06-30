@@ -1,23 +1,30 @@
 
-from src.entidades.funcionario import Funcionario
+from src.services.ImpostoServices import ImpostoService
+from src.services.funcionarioServices import FuncionarioServices
+from src.services.holeriteServices import HoleriteServices
 
 
 
 class Holerite():
-    def __init__(self, faltas) -> None:
-        self.__matricula = Funcionario.matricula
-        self.__data_admissao = self.__data_admissao
-        self.__cargo = self.__cargo
-        self.__comissao = self.__comissao
-        self.__valor_comissao = self.__valor_comissao
+    def __init__(self, faltas, matricula:int, funcionarioServices: FuncionarioServices, 
+                impostoServices: ImpostoService, holeriteServices: HoleriteServices) -> None:
+        
+        query = Adapter().insert(matricula)
+        dados_funcionario = funcionarioServices.get_one(matricula)
+
         self.__faltas = faltas
-        self.__desconto_faltas = self.__desconto_faltas
-        self.__inss = self.__inss
-        self.__irrf = self.__irrf
-        self.__salario_liquido = self.__salario_liquido
-        self.__salario_base = self.__salario_base
-        self.__salario_base_de_calculo = self.__salario_base_de_calculo
-        self.__fgts = self.__fgts
+        self.__matricula = matricula
+        self.__cargo = dados_funcionario['Descricao']
+        self.__comissao = dados_funcionario['Comissao']
+        self.__data_admissao = dados_funcionario['Nome']
+        self.__salario_base = dados_funcionario['SalarioBase']
+        self.__valor_comissao = holeriteServices.calculo_comissao()
+        self.__desconto_faltas = holeriteServices.calculo_desconto_faltas()
+        self.__inss = impostoServices.calculo_contribuicao_inss()
+        self.__irrf = impostoServices.calculo_contribuicao_irrf()
+        self.__salario_liquido = holeriteServices.calculo_salario_liquido
+        self.__salario_base_de_calculo = holeriteServices.calculo_salario_base_de_calculo()
+        self.__fgts = holeriteServices.calculo_fgts()
 
     @property
     def __matricula(self) -> int:
