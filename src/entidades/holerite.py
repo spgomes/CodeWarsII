@@ -1,59 +1,49 @@
 
-from src.services.ImpostoServices import ImpostoService
-from src.services.holeriteServices import HoleriteServices
-
 
 
 class Holerite():
-    def __init__(self, faltas, impostoServices: ImpostoService, holeriteServices: HoleriteServices) -> None:
-
-        self.__faltas = faltas
-        self.__valor_comissao = holeriteServices.calculo_comissao()
-        self.__desconto_faltas = holeriteServices.calculo_desconto_faltas()
-        self.__inss = impostoServices.calculo_contribuicao_inss()
-        self.__irrf = impostoServices.calculo_contribuicao_irrf()
-        self.__salario_liquido = holeriteServices.calculo_salario_liquido()
-        self.__salario_base_de_calculo = holeriteServices.calculo_salario_base_de_calculo()
-        self.__fgts = holeriteServices.calculo_fgts()
+    def __init__(self, dados_holerite: dict) -> None:
+        self.__dados_holerite = dados_holerite
 
     
     @property
-    def __faltas(self) -> int:
-        return self.__faltas
+    def faltas(self) -> int:
+        return self.__dados_holerite['Faltas']
     
     @property
-    def __fgts(self) -> int:
-        return self.__fgts
+    def fgts(self) -> int:
+        return self.__dados_holerite['FGTS']
 
     @property
-    def __salario_base_de_calculo(self) -> int:
-        return self.__salario_base_de_calculo
+    def salario_base_de_calculo(self) -> int:
+        return self.__dados_holerite['SalarioBaseCalculo']
 
     @property
-    def __desconto_faltas(self) -> int:
-        return self.__desconto_faltas
+    def desconto_faltas(self) -> int:
+        return self.__dados_holerite['DescontoFaltas']
     
     @property
-    def __inss(self) -> int:
-        return self.__inss
+    def inss(self) -> int:
+        return self.__dados_holerite['INSS']
     
     @property
-    def __irrf(self) -> int:
-        return self.__irrf
+    def irrf(self) -> int:
+        return self.__dados_holerite['IRRF']
     
     @property
-    def __salario_liquido(self) -> int:
-        return self.__salario_liquido
+    def salario_liquido(self) -> int:
+        return self.__dados_holerite['SalarioLiquido']
     
     @property
-    def __salario_base(self) -> int:
-        return self.__salario_base
+    def salario_base(self) -> int:
+        return self.__dados_holerite['SalarioBase']
     
     @property
-    def __valor_comissao(self) -> int:
-        return self.__valor_comissao
+    def valor_comissao(self) -> int:
+        return self.__dados_holerite['ValorComissao']
     
 
-
+    def to_bd(self, dados_holerite):
+        return dados_holerite
 
     
