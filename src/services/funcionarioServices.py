@@ -1,28 +1,28 @@
 from src.entidades.funcionario import Funcionario
 from src.exceptions.funcionario_not_found_error import FuncionarioNotFoundError
-from datetime import datetime
 
 from src.persistence.funcionarioPersistence import FuncionarioPersistence
 
 
 class FuncionarioServices():
-    def __init__(self, persistencia: FuncionarioPersistence) -> None:
+    def __init__(self, persistencia: FuncionarioPersistence, funcionario: Funcionario) -> None:
         self.persistencia = persistencia
+        self.funcionario = funcionario
+        self.dados_funcionario = funcionario.__dados_funcionario
 
     
-    def save(self) -> None:
-        return self.persistencia.save()
+    def save(self, dados_funcionario) -> None:
+        return self.persistencia.save(self, dados_funcionario)
 
     def get_all(self) -> list:
-        return self.persistencia.get_all('SELECT * FROM Funcionario',{})
+        return self.persistencia.get_all(self)
     
-    def get_one(self, id: int) -> dict:
-        return self.persistencia.get_one('SELECT * FROM Funcionario WHERE id = %(id)s', {'id': id})
-
+    def get_one(self, matricula: int) -> dict:
+        return self.persistencia.get_one(self, matricula)
     
     def get_funcionario(self, matricula: str) -> Funcionario:
-        dados_funcionario = self.persistencia.get_one(self, matricula)
-        return dados_funcionario
+        funcionario: Funcionario = self.persistencia.get_one(self, matricula)
+        return funcionario
 
     def excluir_por_matricula(self, matricula: str) -> None:
         return self.persistencia.remove()

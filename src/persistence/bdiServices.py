@@ -70,3 +70,33 @@ class MySQLConnection(BDIAbstract):
             return False
         return True
         
+        
+    def get_one(self, query, parameters) -> dict:
+        try:
+            if not self.connect():
+                return False
+            cursor = self.cnx.cursor()
+            cursor.execute(query, parameters)
+            resultado = cursor.fetchone()
+            cursor.close()
+            self.cnx.close()
+        except Exception as e:
+            print(e)
+            return None
+        return resultado
+
+
+    def get_all(self, query, parameters) -> list:
+        try:
+            if not self.connect():
+                return False
+            cursor = self.cnx.cursor()
+            cursor.execute(query, parameters)
+            result = cursor.fetchall()
+            cursor.close()
+            self.cnx.close()
+        except Exception as e:
+            print(e)
+            return False
+        return result
+        

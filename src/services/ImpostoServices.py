@@ -1,4 +1,4 @@
-from src.entidades.imposto import INSS, IRRF, Imposto
+from src.entidades.imposto import INSS, IRRF
 from src.services.funcionarioServices import FuncionarioServices
 
 

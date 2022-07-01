@@ -1,7 +1,7 @@
 from unittest import TestCase
 from datetime import datetime
 
-from src.services.funcionarioServices import AcoesFuncionario
+from src.services.funcionarioServices import FuncionarioServices
 from src.entidades.funcionario import Funcionario
 
 class TestConsultarFuncionario(TestCase):
@@ -9,17 +9,17 @@ class TestConsultarFuncionario(TestCase):
     def __init__(self, methodName: str = ...) -> None:
         super().__init__(methodName)
         self.funcionario = None
-        self.acoesFuncionario = None
+        self.funcionarioServices = None
     
     def setUp(self):
-        self.acoesFuncionario = AcoesFuncionario()
-        self.funcionario = Funcionario("111111", "Ana Maria", "11111111100", datetime(2019,7,2), "32", True)
-        self.acoesFuncionario.inserir(self.funcionario)
+        self.funcionarioServices = FuncionarioServices()
+        self.funcionarioServices.get_all()
     
     def test_consulta_deve_retornar_111111(self):
-        resultado = self.acoesFuncionario.consulta("111111")
-        self.assertEqual(resultado.nome, "Ana Maria")
-
+        resultado = self.funcionarioServices.get_all()
+        return self.assertTrue(resultado == None)
+    
+    
     def test_consulta_deve_retornar_tipo_funcionario(self):
         resultado = self.acoesFuncionario.consulta("111111")
         self.assertEqual(type(resultado), Funcionario)

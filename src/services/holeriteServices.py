@@ -1,7 +1,6 @@
 
 
 
-from src.entidades.holerite import Holerite
 from src.services.funcionarioServices import FuncionarioServices
 
 
