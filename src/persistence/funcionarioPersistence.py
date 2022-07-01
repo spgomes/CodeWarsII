@@ -21,14 +21,37 @@ class FuncionarioPersistence():
     def save(self) -> None:
         pass
     
-    def get_one(self, matricula: int, ) -> dict:
-        return dados_funcionario
+    def get_one(self, query, parameters) -> dict:
+        try:
+            if not self.connect():
+                return False
+            cursor = self.cnx.cursor()
+            cursor.execute(query, parameters)
+            resultado = cursor.fetchone()
+            cursor.close()
+            self.cnx.close()
+        except Exception as e:
+            print(e)
+            return None
+        return resultado
 
-    def get_all(self) -> list:
-        pass
+
+    def get_all(self, query, parameters) -> list:
+        try:
+            if not self.connect():
+                return False
+            cursor = self.cnx.cursor()
+            cursor.execute(query, parameters)
+            result = cursor.fetchall()
+            cursor.close()
+            self.cnx.close()
+        except Exception as e:
+            print(e)
+            return False
+        return result
 
     def remove(self, matricula: int) -> None:
         pass
 
-    def update(self, matricula: str, nome: str, cpf: str, data_admissao, cod_cargo: str, comissao: bool) -> bool:
+    def update(self, dados_funcionario: dict) -> bool:
         pass

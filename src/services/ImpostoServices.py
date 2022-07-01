@@ -9,9 +9,9 @@ class ImpostoService():
 
 
     def calculo_contribuicao_inss(self) -> int:
-        impostoINSS = INSS.calculo_contribuicao_inss(self, self.salario_base)
+        impostoINSS = INSS.calculo_contribuicao(self, self.salario_base)
         return impostoINSS
 
     def calculo_contribuicao_irrf(self, ) -> int:
-        impostoIRRF = IRRF.calculo_contribuicao_irrf(self, self.salario_base)
+        impostoIRRF = IRRF.calculo_contribuicao(self, self.salario_base)
         return impostoIRRF

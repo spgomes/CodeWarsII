@@ -14,7 +14,11 @@ class FuncionarioServices():
         return self.persistencia.save()
 
     def get_all(self) -> list:
-        return self.persistencia.get_all()
+        return self.persistencia.get_all('SELECT * FROM Funcionario',{})
+    
+    def get_one(self, id: int) -> dict:
+        return self.persistencia.get_one('SELECT * FROM Funcionario WHERE id = %(id)s', {'id': id})
+
     
     def get_funcionario(self, matricula: str) -> Funcionario:
         dados_funcionario = self.persistencia.get_one(self, matricula)
