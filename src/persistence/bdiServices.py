@@ -32,9 +32,9 @@ class BDIAbstract(ABC):
         pass
     def execute(self, query, parameters) -> bool:
         pass
-    def getOne(self, query, parameters) -> dict:
+    def get_one(self, query, parameters) -> dict:
         pass
-    def getAll(self, query, parameters) -> list:
+    def get_all(self, query, parameters) -> list:
         pass
     
 

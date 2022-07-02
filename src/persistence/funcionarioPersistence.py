@@ -25,7 +25,8 @@ class FuncionarioPersistence():
         except:
             return False
             
-   
+
+
     def get_one(self, matricula: int) -> dict:
         return self.db.get_one('SELECT * FROM Funcionario WHERE Matricula = %(matricula)s', {'Matricula': matricula})
 
@@ -37,7 +38,7 @@ class FuncionarioPersistence():
     def remove(self, matricula: int) -> None:
         return self.db.execute('DELETE FROM Funcionario WHERE Matricula = %(matricula)s', {'Matricula': matricula})
 
- 
+
     def update(self, dados_funcionario: dict) -> bool:
         try:
             self.db.execute("""
@@ -57,7 +58,7 @@ class FuncionarioPersistence():
         except:
             return False
 
-  
+
     def get_last_matricula(self) -> int:
         atual = self.db.get_one('SELECT MAX(Matricula) as matricula FROM Funcionario', {})
         if atual is None:

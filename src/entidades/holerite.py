@@ -43,7 +43,7 @@ class Holerite():
         return self.__dados_holerite['ValorComissao']
     
 
-    def to_bd(self, dados_holerite):
-        return dados_holerite
+    def to_bd(self):
+        return self.__dados_holerite
 
     

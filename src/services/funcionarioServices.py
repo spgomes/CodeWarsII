@@ -6,17 +6,15 @@ from src.persistence.funcionarioPersistence import FuncionarioPersistence
 
 
 class FuncionarioServices():
-    def __init__(self, persistencia: FuncionarioPersistence, funcionario: Funcionario) -> None:
+    def __init__(self, persistencia: FuncionarioPersistence) -> None:
         self.persistencia = persistencia
-        self.funcionario = funcionario
-        self.dados_funcionario = funcionario.__dados_funcionario
 
     
-    def save(self, dados_funcionario) -> None:
+    def save(self, funcionario: Funcionario) -> bool:
         try:
-            if self.get_one(self, dados_funcionario['Matricula']) is not None:
+            if self.get_one(self, funcionario.__dados_funcionario['Matricula'] ) is not None:
                 raise FuncionarioAlreadyExist("Esse Funcionario já está cadastrado!")
-            self.persistencia.save(dados_funcionario)
+            self.persistencia.save(funcionario.to_bd())
             return True
         except:
             return False
@@ -35,11 +33,11 @@ class FuncionarioServices():
     def excluir_por_matricula(self, matricula) -> bool:
         return self.persistencia.remove(matricula)
 
-    def updade(self, dados_funcionario: dict) -> bool:
+    def updade(self, funcionario: Funcionario) -> bool:
         try:
-            if self.get_one(self, dados_funcionario['Matricula']) is None:
+            if self.get_one(self, funcionario.__dados_funcionario['Matricula']) is None:
                 raise FuncionarioNotFoundError("Esse Funcionario não foi encontrado!")
-            self.persistencia.update(dados_funcionario['Matricula'])
+            self.persistencia.update(funcionario.to_bd)
             return True
         except:
             return False
