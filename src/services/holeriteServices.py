@@ -9,8 +9,7 @@ from src.services.ImpostoServices import ImpostoService
 
 
 class HoleriteServices():
-    def __init__(self, faltas: int, persistencia: HoleritePersistence) -> None:
-        super().__init__(faltas)
+    def __init__(self, persistencia: HoleritePersistence) -> None:
         self.persistencia = persistencia
 
     def save(self, holerite: Holerite) -> bool:
@@ -30,13 +29,13 @@ class HoleriteServices():
         return self.persistencia.get_all()
 
 
-    def gera_holerite(self, holerite: Holerite, impostoService: ImpostoService):
-        holerite.to_bd['SalarioLiquido'] = self.calculo_salario_liquido
-        holerite.to_bd['FGTS'] = self.calculo_fgts
-        holerite.to_bd['DescontoFaltas'] = self.calculo_desconto_faltas
-        holerite.to_bd['SalarioBruto'] = self.calculo_salario_bruto
-        holerite.to_bd['INSS'] = impostoService.calculo_contribuicao_inss
-        holerite.to_bd['IRRF'] = impostoService.calculo_contribuicao_irrf
+    def gera_holerite(self, holerite: Holerite, impostoService: ImpostoService, funcionario: Funcionario):
+        holerite.salario_liquido = self.calculo_salario_liquido(funcionario, impostoService)
+        holerite.fgts = self.calculo_fgts()
+        holerite.faltas = self.calculo_desconto_faltas(funcionario)
+        holerite.salario_bruto = self.calculo_salario_bruto(funcionario)
+        holerite.inss = impostoService.calculo_contribuicao_inss(funcionario)
+        holerite.irrf = impostoService.calculo_contribuicao_irrf(funcionario)
         return holerite.to_bd 
     
     
@@ -44,8 +43,8 @@ class HoleriteServices():
         return funcionario.to_bd['SalarioBase'] -   (
                                                     self.calculo_fgts() + 
                                                     self.calculo_desconto_faltas() + 
-                                                    impostoService.calculo_contribuicao_inss + 
-                                                    impostoService.calculo_contribuicao_irrf
+                                                    impostoService.calculo_contribuicao_inss() + 
+                                                    impostoService.calculo_contribuicao_irrf()
                                                     )
         
 

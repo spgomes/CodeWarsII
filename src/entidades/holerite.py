@@ -19,12 +19,12 @@ class Holerite():
         self.__dados_holerite['FGTS'] = value
 
     @property
-    def salario_base_de_calculo(self) -> int:
-        return self.__dados_holerite['SalarioBaseCalculo']
+    def salario_bruto(self) -> int:
+        return self.__dados_holerite['SalarioBruto']
     
-    @salario_base_de_calculo.setter
-    def salario_base_de_calculo(self, value) -> int:
-        self.__dados_holerite['SalarioBaseCalculo'] = value
+    @salario_bruto.setter
+    def salario_bruto(self, value) -> int:
+        self.__dados_holerite['SalarioBruto'] = value
 
     @property
     def desconto_faltas(self) -> int:
