@@ -1,13 +1,11 @@
-from src.entidades.funcionario import Funcionario
+
 from src.persistence.bdiServices import BDIAbstract
 
 
 class HoleritePersistence():
-    def _init_(self, conexao: BDIAbstract, funcionario: Funcionario) -> None:
+    def _init_(self, conexao: BDIAbstract) -> None:
         self.db = conexao
-        self.funcionario = funcionario
-        self.matricula = funcionario.matricula
-    
+
 
     def save_holerite():
         pass

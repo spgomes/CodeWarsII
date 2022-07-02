@@ -1,4 +1,5 @@
 from src.entidades.funcionario import Funcionario
+from src.exceptions.funcionario_already_exist import FuncionarioAlreadyExist
 from src.exceptions.funcionario_not_found_error import FuncionarioNotFoundError
 
 from src.persistence.funcionarioPersistence import FuncionarioPersistence
@@ -12,25 +13,37 @@ class FuncionarioServices():
 
     
     def save(self, dados_funcionario) -> None:
-        return self.persistencia.save(self, dados_funcionario)
+        try:
+            if self.get_one(self, dados_funcionario['Matricula']) is not None:
+                raise FuncionarioAlreadyExist("Esse Funcionario já está cadastrado!")
+            self.persistencia.save(dados_funcionario)
+            return True
+        except:
+            return False
 
     def get_all(self) -> list:
-        return self.persistencia.get_all(self)
+        return self.persistencia.get_all()
     
     def get_one(self, matricula: int) -> dict:
-        return self.persistencia.get_one(self, matricula)
+        return self.persistencia.get_one(matricula)
     
-    def get_funcionario(self, matricula: str) -> Funcionario:
-        funcionario: Funcionario = self.persistencia.get_one(self, matricula)
+    def get_funcionario(self, matricula: int) -> Funcionario:
+        dados_funcionario = self.persistencia.get_one(matricula)
+        funcionario = Funcionario(dados_funcionario)
         return funcionario
 
-    def excluir_por_matricula(self, matricula: str) -> None:
-        return self.persistencia.remove()
+    def excluir_por_matricula(self, matricula) -> bool:
+        return self.persistencia.remove(matricula)
 
-    def alterar_por_matricula(self, matricula: str, nome: str, cpf: str, dta_admissao: datetime, cod_cargo: str, comissao: bool) -> bool:
+    def updade(self, dados_funcionario: dict) -> bool:
         try:
-            funcionario = self.consulta(matricula)
-            funcionario.comissaoSet(comissao)
-        except FuncionarioNotFoundError as e:
-            raise e
+            if self.get_one(self, dados_funcionario['Matricula']) is None:
+                raise FuncionarioNotFoundError("Esse Funcionario não foi encontrado!")
+            self.persistencia.update(dados_funcionario['Matricula'])
+            return True
+        except:
+            return False
+
+
+
 
