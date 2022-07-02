@@ -29,8 +29,6 @@ class Funcionario():
     def comissao(self):
         return self.__dados_funcionario['Comissao']
     
-    def comissaoSet(self, valor):
-        self.__dados_funcionario['Comissao'] = valor
     
     def to_bd(self):
         return self.__dados_funcionario

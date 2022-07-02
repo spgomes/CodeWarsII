@@ -14,33 +14,65 @@ class Holerite():
     def fgts(self) -> int:
         return self.__dados_holerite['FGTS']
 
+    @fgts.setter
+    def fgts(self, value) -> int:
+        self.__dados_holerite['FGTS'] = value
+
     @property
     def salario_base_de_calculo(self) -> int:
         return self.__dados_holerite['SalarioBaseCalculo']
+    
+    @salario_base_de_calculo.setter
+    def salario_base_de_calculo(self, value) -> int:
+        self.__dados_holerite['SalarioBaseCalculo'] = value
 
     @property
     def desconto_faltas(self) -> int:
         return self.__dados_holerite['DescontoFaltas']
     
+    @desconto_faltas.setter
+    def desconto_faltas(self, value) -> int:
+        self.__dados_holerite['DescontoFaltas'] = value
+    
     @property
     def inss(self) -> int:
         return self.__dados_holerite['INSS']
+    
+    @inss.setter
+    def inss(self, value) -> int:
+        self.__dados_holerite['INSS'] = value
     
     @property
     def irrf(self) -> int:
         return self.__dados_holerite['IRRF']
     
+    @irrf.setter
+    def irrf(self, value) -> int:
+        self.__dados_holerite['IRRF'] = value
+    
     @property
     def salario_liquido(self) -> int:
         return self.__dados_holerite['SalarioLiquido']
+    
+    @salario_liquido.setter
+    def salario_liquido(self, value) -> int:
+        self.__dados_holerite['SalarioLiquido'] = value
     
     @property
     def salario_base(self) -> int:
         return self.__dados_holerite['SalarioBase']
     
+    @salario_base.setter
+    def salario_base(self, value) -> int:
+        self.__dados_holerite['SalarioBase'] = value
+    
     @property
     def valor_comissao(self) -> int:
         return self.__dados_holerite['ValorComissao']
+    
+    @valor_comissao.setter
+    def valor_comissao(self, value) -> int:
+        self.__dados_holerite['ValorComissao'] = value
     
 
     def to_bd(self):

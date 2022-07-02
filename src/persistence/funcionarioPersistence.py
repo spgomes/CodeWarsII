@@ -28,7 +28,7 @@ class FuncionarioPersistence():
 
 
     def get_one(self, matricula: int) -> dict:
-        return self.db.get_one('SELECT * FROM Funcionario WHERE Matricula = %(matricula)s', {'Matricula': matricula})
+        return self.db.get_one('SELECT Funcionario.*, Comissao.SalarioBase, Comissao.ValorComissao FROM Funcionario JOIN Comissao USING(codigo_cargo) WHERE Matricula = %(matricula)s', {'Matricula': matricula})
 
 
     def get_all(self) -> list:
